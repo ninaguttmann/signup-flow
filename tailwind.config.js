@@ -3,10 +3,10 @@ export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     screens: {
-      'sm': '640px',
-      'md': '768px',
-      'lg': '1024px',
-      'xl': '1280px',
+      sm: '640px',
+      md: '768px',
+      lg: '1024px',
+      xl: '1280px',
       '2xl': '1440px',
       '3xl': '1920px',
     },
@@ -36,23 +36,23 @@ export default {
         'body-large': ['1.25rem', { lineHeight: '2.375rem', fontWeight: '400' }], // 20px, 38px
         'body-medium': ['1.125rem', { lineHeight: '1.75rem', fontWeight: '400' }], // 18px, 28px
         'body-small': ['1rem', { lineHeight: '1rem', fontWeight: '500' }], // 16px
-        'caption': ['0.875rem', { lineHeight: '0.875rem', fontWeight: '400' }], // 14px
+        caption: ['0.875rem', { lineHeight: '0.875rem', fontWeight: '400' }], // 14px
         'caption-medium': ['0.875rem', { lineHeight: '0.875rem', fontWeight: '500' }], // 14px
-        'label': ['1rem', { lineHeight: '1rem', fontWeight: '600' }], // 16px
+        label: ['1rem', { lineHeight: '1rem', fontWeight: '600' }], // 16px
       },
       spacing: {
-        '2.5': '0.625rem', // 10px
-        '4': '1rem', // 16px
-        '6': '1.5rem', // 24px
-        '9': '2.25rem', // 36px
-        '16': '4rem', // 64px
+        2.5: '0.625rem', // 10px
+        4: '1rem', // 16px
+        6: '1.5rem', // 24px
+        9: '2.25rem', // 36px
+        16: '4rem', // 64px
       },
       borderRadius: {
-        'md': '0.375rem', // 6px
+        md: '0.375rem', // 6px
       },
       boxShadow: {
-        'soft': '0px 4px 14px 1px #0000000A',
-        'medium': '0px 4px 10px 3px #0000001C',
+        soft: '0px 4px 14px 1px #0000000A',
+        medium: '0px 4px 10px 3px #0000001C',
       },
       animation: {
         'fade-in': 'fadeIn 0.3s ease-in-out',
@@ -94,7 +94,5 @@ export default {
       },
     },
   },
-  plugins: [
-    require('@tailwindcss/forms'),
-  ],
-}
+  plugins: [require('@tailwindcss/forms')],
+};

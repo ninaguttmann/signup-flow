@@ -3,95 +3,93 @@
 @tailwind utilities;
 
 @layer base {
-    body {
-        @apply font-sans antialiased;
-    }
+  body {
+    @apply font-sans antialiased;
+  }
 }
 
 @layer components {
-    .btn {
-        @apply w-[426px] h-16 bg-primary-main rounded-md text-text-inverse text-body-small transition-all duration-200 cursor-pointer hover:bg-primary-hover disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none flex items-center justify-center;
-    }
+  .btn {
+    @apply flex h-16 w-[426px] cursor-pointer items-center justify-center rounded-md bg-primary-main text-body-small text-text-inverse transition-all duration-200 hover:bg-primary-hover focus:outline-none disabled:cursor-not-allowed disabled:opacity-50;
+  }
 
-    .input {
-        @apply w-[426px] h-16 bg-white rounded-md border border-text-secondary p-4 text-text-input placeholder-text-secondary transition-all duration-200 focus:outline-none focus:border-primary-main focus:ring-0;
-    }
+  .input {
+    @apply h-16 w-[426px] rounded-md border border-text-secondary bg-white p-4 text-text-input placeholder-text-secondary transition-all duration-200 focus:border-primary-main focus:outline-none focus:ring-0;
+  }
 
-    .input-error {
-        @apply input border-error focus:border-error focus:ring-0;
-    }
+  .input-error {
+    @apply input border-error focus:border-error focus:ring-0;
+  }
 
-    .select {
-        @apply input appearance-none pr-10;
-        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
-        background-size: 1.5em 1.5em;
-        background-position: right 0.5rem center;
-        background-repeat: no-repeat;
-    }
+  .select {
+    @apply input appearance-none pr-10;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    background-size: 1.5em 1.5em;
+    background-position: right 0.5rem center;
+    background-repeat: no-repeat;
+  }
 
-    .checkbox {
-        @apply w-5 h-5 rounded border-2 border-text-secondary
-        text-primary-main focus:ring-2 focus:ring-primary-main focus:ring-offset-0
-        transition-all cursor-pointer;
-    }
+  .checkbox {
+    @apply h-5 w-5 cursor-pointer rounded border-2 border-text-secondary text-primary-main transition-all focus:ring-2 focus:ring-primary-main focus:ring-offset-0;
+  }
 
-    .label {
-        @apply block text-text-muted mb-2;
-    }
+  .label {
+    @apply mb-2 block text-text-muted;
+  }
 
-    .label-required::after {
-        @apply text-error ml-1;
-        content: '*';
-    }
+  .label-required::after {
+    @apply ml-1 text-error;
+    content: '*';
+  }
 
-    .error-text {
-        @apply text-sm text-error mt-1.5 flex items-center gap-1;
-    }
+  .error-text {
+    @apply mt-1.5 flex items-center gap-1 text-sm text-error;
+  }
 
-    .card {
-        @apply w-[426px] bg-white rounded-md p-[28px] shadow-soft text-caption;
-    }
+  .card {
+    @apply w-[426px] rounded-md bg-white p-[28px] text-caption shadow-soft;
+  }
 
-    .card-hover {
-        @apply w-[426px] bg-card-hover rounded-md border border-primary-main shadow-medium text-caption p-[28px] cursor-pointer;
-    }
+  .card-hover {
+    @apply w-[426px] cursor-pointer rounded-md border border-primary-main bg-card-hover p-[28px] text-caption shadow-medium;
+  }
 
-    .form-group {
-        @apply mb-6;
-    }
+  .form-group {
+    @apply mb-6;
+  }
 
-    .page-wrapper {
-        @apply min-h-screen grid grid-cols-[46%_auto] bg-white;
-    }
+  .page-wrapper {
+    @apply grid min-h-screen grid-cols-[46%_auto] bg-white;
+  }
 
-    .heading-2 {
-        @apply text-heading-large text-text-main;
-    }
+  .heading-2 {
+    @apply text-heading-large text-text-main;
+  }
 
-    .heading-3 {
-        @apply text-body-small text-text-main;
-    }
+  .heading-3 {
+    @apply text-body-small text-text-main;
+  }
 
-    .body-text {
-        @apply text-body-medium text-text-secondary;
-    }
+  .body-text {
+    @apply text-body-medium text-text-secondary;
+  }
 
-    .divider {
-        @apply w-full opacity-100 border-t border-divider;
-    }
+  .divider {
+    @apply w-full border-t border-divider opacity-100;
+  }
 }
 
 @layer utilities {
-    .text-balance {
-        text-wrap: balance;
-    }
+  .text-balance {
+    text-wrap: balance;
+  }
 
-    .scrollbar-hide {
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-    }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 
-    .scrollbar-hide::-webkit-scrollbar {
-        display: none;
-    }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
 }
