@@ -2,75 +2,57 @@
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
+    screens: {
+      'sm': '640px',
+      'md': '768px',
+      'lg': '1024px',
+      'xl': '1280px',
+      '2xl': '1440px',
+      '3xl': '1920px',
+    },
     extend: {
       colors: {
-        brand: {
-          blue: '#4F46E5',
-          purple: '#8B5CF6',
-          light: '#EEF2FF',
-        },
         primary: {
-          50: '#EEF2FF',
-          100: '#E0E7FF',
-          200: '#C7D2FE',
-          300: '#A5B4FC',
-          400: '#818CF8',
-          500: '#6366F1',
-          600: '#4F46E5',
-          700: '#4338CA',
-          800: '#3730A3',
-          900: '#312E81',
+          main: '#1565D8',
+          hover: '#0D4FAD',
         },
-        accent: {
-          50: '#FAF5FF',
-          100: '#F3E8FF',
-          500: '#8B5CF6',
-          600: '#7C3AED',
+        text: {
+          main: '#000000',
+          secondary: '#8692A6',
+          inverse: '#FFFFFF',
+          muted: '#696F79',
+          input: '#494949',
+          placeholder: '#BDBDBD',
         },
-        success: '#10B981',
-        error: '#EF4444',
-        warning: '#F59E0B',
-        neutral: {
-          50: '#F9FAFB',
-          100: '#F3F4F6',
-          200: '#E5E7EB',
-          300: '#D1D5DB',
-          400: '#9CA3AF',
-          500: '#6B7280',
-          600: '#4B5563',
-          700: '#374151',
-          800: '#1F2937',
-          900: '#111827',
-        },
+        error: '#F73A3A',
+        'card-hover': '#F5F9FF',
+        divider: '#F5F5F5',
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
       },
       fontSize: {
-        'xs': ['0.75rem', { lineHeight: '1rem' }],
-        'sm': ['0.875rem', { lineHeight: '1.25rem' }],
-        'base': ['1rem', { lineHeight: '1.5rem' }],
-        'lg': ['1.125rem', { lineHeight: '1.75rem' }],
-        'xl': ['1.25rem', { lineHeight: '1.75rem' }],
-        '2xl': ['1.5rem', { lineHeight: '2rem' }],
-        '3xl': ['1.875rem', { lineHeight: '2.25rem' }],
-        '4xl': ['2.25rem', { lineHeight: '2.5rem', letterSpacing: '-0.02em' }],
+        'heading-large': ['1.875rem', { lineHeight: '1.875rem', fontWeight: '700' }], // 30px
+        'body-large': ['1.25rem', { lineHeight: '2.375rem', fontWeight: '400' }], // 20px, 38px
+        'body-medium': ['1.125rem', { lineHeight: '1.75rem', fontWeight: '400' }], // 18px, 28px
+        'body-small': ['1rem', { lineHeight: '1rem', fontWeight: '500' }], // 16px
+        'caption': ['0.875rem', { lineHeight: '0.875rem', fontWeight: '400' }], // 14px
+        'caption-medium': ['0.875rem', { lineHeight: '0.875rem', fontWeight: '500' }], // 14px
+        'label': ['1rem', { lineHeight: '1rem', fontWeight: '600' }], // 16px
       },
       spacing: {
-        '18': '4.5rem',
-        '88': '22rem',
-        '128': '32rem',
+        '2.5': '0.625rem', // 10px
+        '4': '1rem', // 16px
+        '6': '1.5rem', // 24px
+        '9': '2.25rem', // 36px
+        '16': '4rem', // 64px
       },
       borderRadius: {
-        'xl': '0.75rem',
-        '2xl': '1rem',
-        '3xl': '1.5rem',
+        'md': '0.375rem', // 6px
       },
       boxShadow: {
-        'soft': '0 2px 8px rgba(0, 0, 0, 0.04)',
-        'card': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
-        'card-hover': '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
-        'input-focus': '0 0 0 3px rgba(79, 70, 229, 0.1)',
+        'soft': '0px 4px 14px 1px #0000000A',
+        'medium': '0px 4px 10px 3px #0000001C',
       },
       animation: {
         'fade-in': 'fadeIn 0.3s ease-in-out',
