@@ -3,17 +3,26 @@ import { useState, useCallback } from 'react';
 import Input from '../components/common/Input';
 import Button from '../components/common/Button';
 import { RemoveIcon, PlusIcon } from '../components/common/Icons';
+import { ErrorMessage } from '../components/common/ErrorMessage';
 import { VALIDATION_RULES, ERROR_MESSAGES, type PersonalInfoFormData } from '../utils/validation';
 import { useOnboardingStore } from '../store/onboardingStore';
 import { validateField } from '../utils/personalInfoUtils';
+import { useRegisterMutation } from '../hooks/useRegisterMutation';
 
 const TeamStep = () => {
   const stepContent = getStepContent(4);
-  const { team, setTeam, goToStep } = useOnboardingStore();
+  const { team, setTeam } = useOnboardingStore();
   const [emails, setEmails] = useState<string[]>(team || ['']);
   const [errors, setErrors] = useState<string[]>(['']);
   const [touched, setTouched] = useState<boolean[]>([false]);
   const [limitError, setLimitError] = useState('');
+  const [registrationError, setRegistrationError] = useState<{message: string; details?: string} | null>(null);
+  
+  const handleRegistrationError = useCallback((message: string, details?: string) => {
+    setRegistrationError({ message, details });
+  }, []);
+
+  const registerMutation = useRegisterMutation(handleRegistrationError);
 
   const isValidEmail = useCallback((email: string): boolean => {
     if (!email || email.trim() === '') {
@@ -135,8 +144,10 @@ const TeamStep = () => {
 
     const validEmails = emails.filter((email) => email && email.trim() !== '');
     setTeam(validEmails);
-    goToStep(5);
-  }, [emails, validateEmail, setTeam, goToStep]);
+    
+    // Trigger the registration mutation
+    registerMutation.mutate();
+  }, [emails, validateEmail, setTeam, registerMutation]);
 
   return (
     <div>
@@ -192,9 +203,23 @@ const TeamStep = () => {
           </button>
         )}
 
+        {registrationError && (
+          <div className="mt-6">
+            <ErrorMessage 
+              message={registrationError.message} 
+              details={registrationError.details}
+              onDismiss={() => setRegistrationError(null)}
+            />
+          </div>
+        )}
+
         <div className="mt-8">
-          <Button onClick={handleSubmit} disabled={!canSaveAndContinue()} className="w-full">
-            Save & Continue
+          <Button 
+            onClick={handleSubmit} 
+            disabled={!canSaveAndContinue() || registerMutation.isPending} 
+            className="w-full"
+          >
+            {registerMutation.isPending ? 'Registering...' : 'Save & Continue'}
           </Button>
         </div>
       </form>

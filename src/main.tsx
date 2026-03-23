@@ -5,7 +5,6 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import './index.css';
 import App from './App.tsx';
 
-// MSW setup for development
 async function enableMocking() {
   if (process.env.NODE_ENV !== 'development') {
     return;
@@ -13,7 +12,6 @@ async function enableMocking() {
 
   const { worker } = await import('./mocks/browser');
 
-  // start worker before any requests might be made
   return worker.start({
     onUnhandledRequest: 'warn',
   });

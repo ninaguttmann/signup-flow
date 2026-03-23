@@ -1,11 +1,9 @@
 import { http, HttpResponse, delay } from 'msw';
 import type { RegisterResponse, RegisterPayload } from '../types/onboarding';
 
-// Global error rate controlled by console commands
-const mockErrorRate = 0.1; // Default 10% error rate
+const mockErrorRate = 0.1;
 let forceErrorType: string | null = null;
 
-// Error type constants for better type safety
 const ErrorType = {
   VALIDATION: 'validation',
   SERVER_ERROR: 'server_error',
@@ -14,7 +12,6 @@ const ErrorType = {
   USER_EXISTS: 'user_exists',
 } as const;
 
-// Common server error scenarios
 const errorScenarios = [
   {
     type: ErrorType.VALIDATION,
@@ -51,11 +48,6 @@ const registeredUsers = [
   'existing@user.com',
 ];
 
-/**
- * Validates the registration payload
- * @param data - The registration data to validate
- * @returns true if valid, false otherwise
- */
 function validateRegistrationData(data: RegisterPayload): boolean {
   return !!(
     data.name?.trim() &&
@@ -67,6 +59,54 @@ function validateRegistrationData(data: RegisterPayload): boolean {
   );
 }
 
+if (typeof window !== 'undefined') {
+  type MockRegistrationCommands = {
+    forceValidationError: () => void;
+    forceServerError: () => void;
+    forceServiceUnavailable: () => void;
+    forceTimeout: () => void;
+    forceUserExists: () => void;
+    setErrorRate: (rate: number) => void;
+    reset: () => void;
+  };
+
+  (window as unknown as { mockRegistration: MockRegistrationCommands }).mockRegistration = {
+    forceValidationError: () => {
+      forceErrorType = ErrorType.VALIDATION;
+      console.log('MSW: Next registration will force a validation error');
+    },
+    forceServerError: () => {
+      forceErrorType = ErrorType.SERVER_ERROR;
+      console.log('MSW: Next registration will force a server error');
+    },
+    forceServiceUnavailable: () => {
+      forceErrorType = ErrorType.SERVICE_UNAVAILABLE;
+      console.log('MSW: Next registration will force a service unavailable error');
+    },
+    forceTimeout: () => {
+      forceErrorType = ErrorType.TIMEOUT;
+      console.log('🔧 MSW: Next registration will force a timeout error');
+    },
+    forceUserExists: () => {
+      forceErrorType = ErrorType.USER_EXISTS;
+      console.log('🔧 MSW: Next registration will force a user exists error');
+    },
+    setErrorRate: (rate: number) => {
+      if (rate >= 0 && rate <= 1) {
+        (mockErrorRate as number) = rate;
+        console.log(`🔧 MSW: Error rate set to ${(rate * 100).toFixed(0)}%`);
+      } else {
+        console.error('Error rate must be between 0 and 1');
+      }
+    },
+    reset: () => {
+      forceErrorType = null;
+      (mockErrorRate as number) = 0.1;
+      console.log('🔧 MSW: Registration mock reset to normal behavior');
+    },
+  };
+}
+
 export const handlers = [
   http.post('/api/register', async ({ request }) => {
     await delay(1500);
@@ -75,9 +115,6 @@ export const handlers = [
       const rawData = await request.json();
       const data = rawData as RegisterPayload;
 
-      console.log('MSW: Received registration request:', data);
-
-      // Validate input data
       if (!validateRegistrationData(data)) {
         const response: RegisterResponse = {
           success: false,
@@ -89,9 +126,7 @@ export const handlers = [
         return HttpResponse.json(response, { status: 400 });
       }
 
-      // Check if user is already registered (this takes priority over other errors)
       if (registeredUsers.includes(data.email.toLowerCase())) {
-        console.log(`MSW: User ${data.email} already registered`);
         const response: RegisterResponse = {
           success: false,
           message: 'Account already exists: This email is already registered.',
@@ -105,16 +140,16 @@ export const handlers = [
         return HttpResponse.json(response, { status: 409 });
       }
 
-      // Check if we should simulate an error
       if (Math.random() < mockErrorRate || forceErrorType) {
-        // Select error scenario
-        const errorScenario = forceErrorType
-          ? errorScenarios.find((e) => e.type === forceErrorType) ||
+        const currentForceErrorType = forceErrorType;
+        
+        const errorScenario = currentForceErrorType
+          ? errorScenarios.find((e) => e.type === currentForceErrorType) ||
             errorScenarios[errorScenarios.length - 1]
           : errorScenarios[Math.floor(Math.random() * errorScenarios.length)];
 
         if (forceErrorType) {
-          forceErrorType = null; // Reset after use
+          forceErrorType = null;
         }
 
         console.log(`MSW: Simulating ${errorScenario.type} error (${errorScenario.status})`);
@@ -130,11 +165,13 @@ export const handlers = [
         return HttpResponse.json(response, { status: errorScenario.status });
       }
 
+      console.log('MSW: Registration successful - no error triggered');
+
       const response: RegisterResponse = {
         success: true,
         userId: crypto.randomUUID(),
         message: 'Registration successful!',
-        email: data.email, // Only return non-sensitive data
+        email: data.email,
       };
 
       return HttpResponse.json(response);
