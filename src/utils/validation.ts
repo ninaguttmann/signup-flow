@@ -63,7 +63,7 @@ export const residencyInfoSchema = z.object({
       VALIDATION_RULES.address.max,
       `Address cannot exceed ${VALIDATION_RULES.address.max} characters`
     ),
-  country: z.enum(countryCodes, { message: 'Please select a country' }),
+  country: z.enum(['', ...countryCodes], { message: 'Please select a country' }),
 });
 
 const createTeamValidation = (userEmail?: string) => (emails: string[]) => {
