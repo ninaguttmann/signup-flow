@@ -1,6 +1,6 @@
 import { forwardRef, useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import { cn } from '@/utils/cn';
-import { ChevronDownIcon, XIcon } from './Icons';
+import { DownArrowIcon, XIcon } from './Icons';
 
 interface SelectOption {
   value: string;
@@ -80,7 +80,6 @@ const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(
             event.preventDefault();
             setHighlightedIndex((prev) => {
               const nextIndex = prev < filteredOptions.length - 1 ? prev + 1 : 0;
-              // Skip disabled options
               if (filteredOptions[nextIndex]?.disabled) {
                 return prev < filteredOptions.length - 2 ? prev + 2 : 0;
               }
@@ -91,7 +90,6 @@ const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(
             event.preventDefault();
             setHighlightedIndex((prev) => {
               const nextIndex = prev > 0 ? prev - 1 : filteredOptions.length - 1;
-              // Skip disabled options
               if (filteredOptions[nextIndex]?.disabled) {
                 return prev > 1 ? prev - 2 : filteredOptions.length - 1;
               }
@@ -180,20 +178,27 @@ const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(
                   <XIcon />
                 </div>
               )}
-              <button
-                type="button"
+              <div
                 onClick={(e) => {
                   e.stopPropagation();
                   setIsOpen(!isOpen);
                 }}
-                className="text-text-secondary hover:text-text-main focus:outline-none"
+                className="text-text-secondary hover:text-text-main focus:outline-none cursor-pointer"
                 aria-label={isOpen ? 'Close dropdown' : 'Open dropdown'}
-                disabled={disabled || loading}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    setIsOpen(!isOpen);
+                  }
+                }}
+                role="button"
+                tabIndex={0}
               >
-                <ChevronDownIcon
+                <DownArrowIcon
                   className={cn('transition-transform duration-200', isOpen && 'rotate-180')}
                 />
-              </button>
+              </div>
             </div>
           </button>
 

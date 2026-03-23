@@ -4,13 +4,11 @@ import { ChevronDownIcon } from './Icons';
 
 const STEP_MAPPING = {
   1: null,
-  2: 'Step 1 of 3', // Personal Info
-  3: 'Step 2 of 3', // Address
-  4: 'Step 3 of 3', // Team
+  2: 'Step 01/03',
+  3: 'Step 02/03',
+  4: 'Step 03/03',
   5: null,
 } as const;
-
-const CHEVRON_ROTATION = 'rotate-90';
 
 interface StepNavigationProps {
   currentStep: number;
@@ -38,19 +36,19 @@ const StepNavigation: React.FC<StepNavigationProps> = ({
 
   const getStepDisplay = useCallback((step: number, total: number) => {
     const mappedStep = STEP_MAPPING[step as keyof typeof STEP_MAPPING];
-    return mappedStep || `Step ${step} of ${total}`;
+    return mappedStep || `Step ${String(step).padStart(2, '0')}/${String(total).padStart(2, '0')}`;
   }, []);
 
   return (
     <div className={cn('flex h-12 w-full items-center justify-between bg-white', className)}>
-      <div className="flex items-center gap-2 pr-[90px]">
+      <div className="flex items-center gap-2 pr-[90px] pl-[53px]">
         {!isFirstStep && showBackButton && (
           <button
             onClick={onBack}
             className="flex items-center gap-2 text-text-secondary transition-colors duration-200 hover:text-text-main focus:text-text-main focus:outline-none"
             aria-label="Go back to previous step"
           >
-            <ChevronDownIcon className={`h-5 w-5 ${CHEVRON_ROTATION}`} />
+            <ChevronDownIcon className="h-5 w-5" />
             <span className="back-text">Back</span>
           </button>
         )}

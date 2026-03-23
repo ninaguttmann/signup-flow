@@ -74,7 +74,7 @@ export const residencyInfoSchema = z.object({
   country: z.enum(['', ...COUNTRY_CODES], { message: ERROR_MESSAGES.countryRequired }),
 });
 
-const hasDuplicates = (emails: string[]): boolean => {
+export const hasDuplicates = (emails: string[]): boolean => {
   const normalized = emails.map((email) => email.toLowerCase());
   return new Set(normalized).size !== emails.length;
 };

@@ -146,19 +146,23 @@
   }
 
   .back-text {
-    @apply text-caption-medium font-medium;
+    @apply font-sans font-semibold text-base leading-none tracking-normal align-middle text-text-secondary;
   }
 
   .step-counter {
-    @apply text-caption-medium font-medium text-text-secondary;
+    @apply font-sans font-medium text-sm leading-none tracking-normal text-right align-middle text-text-placeholder;
   }
 
   .step-title {
-    @apply text-body-small font-medium text-text-main;
+    @apply font-sans font-semibold text-base leading-none tracking-normal text-right align-middle text-text-secondary;
   }
 
   .icon-inverted {
     filter: invert(1);
+  }
+
+  .security-text {
+    @apply font-sans font-normal text-xs leading-none tracking-normal text-center align-middle text-text-secondary;
   }
 
   .group:hover .icon-inverted {

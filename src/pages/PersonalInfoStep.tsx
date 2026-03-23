@@ -5,6 +5,7 @@ import Input from '../components/common/Input';
 import Checkbox from '../components/common/Checkbox';
 import Button from '../components/common/Button';
 import TermsPopup from '../components/common/TermsPopup';
+import { LockIcon } from '../components/common/Icons';
 import { personalInfoSchema, type PersonalInfoFormData } from '../utils/validation';
 import {
   formatFieldError,
@@ -57,7 +58,6 @@ const PersonalInfoStep = () => {
   useEffect(() => {
     const newErrors: Record<string, string> = {};
 
-    // Only validate touched fields for better performance
     const touchedFields = Object.keys(touched).filter(
       (key) => touched[key as keyof typeof touched]
     );
@@ -163,6 +163,11 @@ const PersonalInfoStep = () => {
           Register Account
         </Button>
       </form>
+
+      <div className="mt-4 flex items-center justify-center gap-2">
+        <LockIcon className="w-4 h-4" />
+        <span className="security-text">Your Info is safely secured</span>
+      </div>
 
       <TermsPopup isOpen={showTermsPopup} onClose={() => setShowTermsPopup(false)} />
     </div>

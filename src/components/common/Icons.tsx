@@ -11,6 +11,19 @@ export const ChevronDownIcon = ({ className = '' }: IconProps) => (
     xmlns="http://www.w3.org/2000/svg"
     className={className}
   >
+    <path d="M14.8625 3.225L13.3791 1.75L5.13745 10L13.3875 18.25L14.8625 16.775L8.08745 10L14.8625 3.225Z" fill="#8692A6"/>
+  </svg>
+);
+
+export const DownArrowIcon = ({ className = '' }: IconProps) => (
+  <svg
+    width="20"
+    height="20"
+    viewBox="0 0 20 20"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+  >
     <path
       d="M10.1937 12.2522L7.11728 8.83402C6.94353 8.64097 7.08053 8.33333 7.34027 8.33333H13.493C13.7528 8.33333 13.8898 8.64097 13.716 8.83402L10.6396 12.2522C10.5205 12.3846 10.3128 12.3846 10.1937 12.2522Z"
       fill="currentColor"
@@ -393,37 +406,37 @@ export const RemoveIcon = ({ className = '' }: IconProps) => (
     <path
       d="M3 6H21"
       stroke="#F73A3A"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
     <path
       d="M19 6V20C19 21 18 22 17 22H7C6 22 5 21 5 20V6"
       stroke="#F73A3A"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
     <path
       d="M8 6V4C8 3 9 2 10 2H14C15 2 16 3 16 4V6"
       stroke="#F73A3A"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
     <path
       d="M10 11V17"
       stroke="#F73A3A"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
     <path
       d="M14 11V17"
       stroke="#F73A3A"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
   </svg>
 );
@@ -440,23 +453,23 @@ export const PlusIcon = ({ className = '' }: IconProps) => (
     <path
       d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
       stroke="#1565D8"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
     <path
       d="M8 12H16"
       stroke="#1565D8"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
     <path
       d="M12 8V16"
       stroke="#1565D8"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
   </svg>
 );
@@ -495,9 +508,9 @@ export const SuccessIcon = ({ className = '' }: IconProps) => (
       <path
         d="M60.7598 81.6202L73.7403 94.6007L106.192 62.1494"
         stroke="white"
-        stroke-width="8"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </g>
     <defs>
@@ -508,9 +521,9 @@ export const SuccessIcon = ({ className = '' }: IconProps) => (
         width="113.432"
         height="100.451"
         filterUnits="userSpaceOnUse"
-        color-interpolation-filters="sRGB"
+        colorInterpolationFilters="sRGB"
       >
-        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feFlood floodOpacity="0" result="BackgroundImageFix" />
         <feColorMatrix
           in="SourceAlpha"
           type="matrix"
@@ -537,5 +550,11 @@ export const ErrorIcon = ({ className = '' }: IconProps) => (
       d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" 
       clipRule="evenodd" 
     />
+  </svg>
+);
+
+export const LockIcon = ({ className = '' }: IconProps) => (
+  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
+    <path fillRule="evenodd" clipRule="evenodd" d="M9.91671 4.95833H10.5C11.1417 4.95833 11.6667 5.48333 11.6667 6.125V11.9583C11.6667 12.6 11.1417 13.125 10.5 13.125H3.50004C2.85837 13.125 2.33337 12.6 2.33337 11.9583V6.125C2.33337 5.48333 2.85837 4.95833 3.50004 4.95833H4.08337V3.79167C4.08337 2.18167 5.39004 0.875 7.00004 0.875C8.61004 0.875 9.91671 2.18167 9.91671 3.79167V4.95833ZM7.00004 2.04167C6.03171 2.04167 5.25004 2.82333 5.25004 3.79167V4.95833H8.75004V3.79167C8.75004 2.82333 7.96837 2.04167 7.00004 2.04167ZM3.50004 11.9583V6.125H10.5V11.9583H3.50004ZM8.16671 9.04167C8.16671 9.68333 7.64171 10.2083 7.00004 10.2083C6.35837 10.2083 5.83337 9.68333 5.83337 9.04167C5.83337 8.4 6.35837 7.875 7.00004 7.875C7.64171 7.875 8.16671 8.4 8.16671 9.04167Z" fill="#8692A6"/>
   </svg>
 );

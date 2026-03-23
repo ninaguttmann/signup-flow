@@ -4,13 +4,19 @@ import { useState, useEffect, useMemo } from 'react';
 import Input from '../components/common/Input';
 import Dropdown from '../components/common/Dropdown';
 import Button from '../components/common/Button';
+import { LockIcon } from '../components/common/Icons';
 import { type ResidencyInfoFormData } from '../utils/validation';
 import {
   validateResidencyField,
   validateResidencyFormForSubmit,
   formatAddressFieldError,
-  COUNTRY_OPTIONS,
 } from '../utils/addressUtils';
+
+const mutableCountryOptions: Array<{value: string; label: string}> = [
+  { value: 'SI', label: 'Slovenia' },
+  { value: 'US', label: 'USA' },
+  { value: 'EN', label: 'England' },
+];
 
 const AddressStep = () => {
   const { accountType, residencyInfo, setResidencyInfo, goToStep } = useOnboardingStore();
@@ -113,7 +119,7 @@ const AddressStep = () => {
 
         <Dropdown
           label="Country"
-          options={COUNTRY_OPTIONS}
+          options={mutableCountryOptions}
           value={formData.country}
           onChange={(value) => handleInputChange('country')(value)}
           placeholder="Select your country"
@@ -130,6 +136,11 @@ const AddressStep = () => {
           Continue
         </Button>
       </form>
+
+      <div className="mt-4 flex items-center justify-center gap-2">
+        <LockIcon className="w-4 h-4" />
+        <span className="security-text">Your Info is safely secured</span>
+      </div>
     </div>
   );
 };

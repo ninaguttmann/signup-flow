@@ -47,7 +47,7 @@ export default {
         9: '2.25rem', // 36px
         16: '4rem', // 64px
         'content-max-width': '426px',
-        'content-margin-top': '135px',
+        'content-margin-top': '78px',
       },
       borderRadius: {
         md: '0.375rem', // 6px
