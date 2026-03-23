@@ -3,6 +3,14 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --button-height: 4rem;
+    --input-height: 4rem;
+    --max-component-width: 426px;
+    --transition-duration: 200ms;
+    --transition-slow: 700ms;
+  }
+
   body {
     @apply font-sans antialiased;
   }
@@ -10,7 +18,15 @@
 
 @layer components {
   .btn {
-    @apply flex h-16 w-full max-w-[426px] cursor-pointer items-center justify-center rounded-md bg-primary-main text-body-small text-text-inverse transition-all duration-200 hover:bg-primary-hover focus:outline-none disabled:cursor-not-allowed disabled:opacity-50;
+    @apply flex h-[var(--button-height)] w-full max-w-[var(--max-component-width)] transform cursor-pointer items-center justify-center rounded-md bg-primary-main text-body-small text-text-inverse transition-all duration-[var(--transition-duration)] hover:bg-primary-hover focus:outline-none disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .btn:hover {
+    @apply scale-105 transform;
+  }
+
+  .btn-responsive {
+    @apply btn max-w-full md:max-w-[var(--max-component-width)];
   }
 
   .btn-secondary {
@@ -18,7 +34,7 @@
   }
 
   .input {
-    @apply h-16 w-full max-w-[426px] rounded-md border border-text-secondary bg-white p-4 font-sans text-caption-medium text-text-input transition-all duration-700 placeholder:text-caption-medium placeholder:text-text-secondary focus:border-primary-main focus:outline-none focus:ring-0;
+    @apply h-[var(--input-height)] w-full max-w-[var(--max-component-width)] rounded-md border border-text-secondary bg-white p-4 font-sans text-caption-medium text-text-input transition-all duration-[var(--transition-slow)] placeholder:text-caption-medium placeholder:text-text-secondary focus:border-primary-main focus:outline-none focus:ring-0;
   }
 
   .input-error {
@@ -43,7 +59,7 @@
   }
 
   .checkbox-text {
-    @apply items-center font-sans text-base font-medium leading-none tracking-normal;
+    @apply flex items-center font-sans text-base font-medium leading-none tracking-normal text-text-muted;
   }
 
   .checkbox-link {
@@ -64,8 +80,7 @@
   }
 
   .password-toggle {
-    @apply absolute top-1/2 z-10 flex -translate-y-1/2 items-center justify-center text-text-secondary hover:text-text-main focus:outline-none;
-    right: 74px; /* Matches input padding (16px) + icon width (20px) + icon spacing (38px) */
+    @apply absolute right-4 top-1/2 z-10 flex -translate-y-1/2 items-center justify-center text-text-secondary hover:text-text-main focus:outline-none;
   }
 
   .password-toggle-text {
@@ -73,11 +88,11 @@
   }
 
   .card {
-    @apply w-[426px] rounded-md border border-transparent bg-white p-[28px] text-caption shadow-soft;
+    @apply w-[var(--max-component-width)] rounded-md border border-transparent bg-white p-[28px] text-caption shadow-soft;
   }
 
   .card-hover {
-    @apply w-[426px] cursor-pointer rounded-md border border-primary-main bg-card-hover p-[28px] text-caption shadow-soft;
+    @apply w-[var(--max-component-width)] cursor-pointer rounded-md border border-primary-main bg-card-hover p-[28px] text-caption shadow-soft;
   }
 
   .form-group {
@@ -106,6 +121,10 @@
     @apply text-heading-large text-text-main;
   }
 
+  .heading-2-5 {
+    @apply text-body-large font-medium text-text-main;
+  }
+
   .heading-3 {
     @apply text-body-small text-text-main;
   }
@@ -123,7 +142,7 @@
   }
 
   .sign-in-link {
-    @apply text-right font-sans text-body-medium font-medium text-blue-600 transition-colors duration-200 hover:text-blue-700 focus:outline-none;
+    @apply text-right font-sans text-body-medium font-medium text-blue-600 transition-colors duration-[var(--transition-duration)] hover:text-blue-700 focus:outline-none;
   }
 
   .back-text {
@@ -159,5 +178,21 @@
 
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
+  }
+
+  .animate-fade-in {
+    @apply opacity-0 transition-opacity duration-[var(--transition-slow)];
+  }
+
+  .animate-fade-in-active {
+    @apply opacity-100;
+  }
+
+  .animate-slide-up {
+    @apply translate-y-4 transform opacity-0 transition-all duration-[var(--transition-duration)];
+  }
+
+  .animate-slide-up-active {
+    @apply translate-y-0 transform opacity-100;
   }
 }

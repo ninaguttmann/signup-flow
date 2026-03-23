@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import type { CountryCode, AccountType } from '@/types/onboarding';
 
-const PASSWORD_PATTERNS = {
+export const PASSWORD_PATTERNS = {
   uppercase: /[A-Z]/,
   lowercase: /[a-z]/,
   numbers: /[0-9]/,
@@ -9,7 +9,7 @@ const PASSWORD_PATTERNS = {
 } as const;
 
 const VALIDATION_RULES = {
-  name: { min: 2, max: 50 },
+  name: { min: 5, max: 50 },
   address: { min: 5, max: 200 },
   password: { min: 8 },
   team: { maxMembers: 5 },
@@ -20,13 +20,16 @@ const ERROR_MESSAGES = {
   teamMax: 'Maximum 5 teammates allowed',
   duplicates: 'Duplicate email addresses are not allowed',
   ownEmail: 'You cannot add your own email to the team',
+  required: 'This field is required',
 } as const;
 
 const emailSchema = z
   .string()
-  .min(1, 'Email is required')
-  .regex(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, 'Invalid email format');
+  .min(1, ERROR_MESSAGES.required)
+  .regex(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, ERROR_MESSAGES.email);
+
 const accountTypes = ['individual', 'business'] satisfies AccountType[];
+
 const countryCodes = ['SI', 'US', 'EN'] satisfies Exclude<CountryCode, null>[];
 
 export const personalInfoSchema = z.object({
@@ -65,11 +68,13 @@ export const residencyInfoSchema = z.object({
 
 const createTeamValidation = (userEmail?: string) => (emails: string[]) => {
   if (emails.length === 0) return true;
-  const uniqueEmails = new Set(emails.map((email) => email.toLowerCase()));
+
+  const normalizedEmails = emails.map((email) => email.toLowerCase());
+
+  const uniqueEmails = new Set(normalizedEmails);
   if (uniqueEmails.size !== emails.length) return false;
-  if (userEmail && emails.some((email) => email.toLowerCase() === userEmail.toLowerCase()))
-    return false;
-  return true;
+
+  return !(userEmail && normalizedEmails.some((email) => email === userEmail.toLowerCase()));
 };
 
 export const teamSchema = z.object({

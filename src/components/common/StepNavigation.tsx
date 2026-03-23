@@ -2,6 +2,16 @@ import React, { useCallback } from 'react';
 import { cn } from '@/utils/cn';
 import { ChevronDownIcon } from './Icons';
 
+const STEP_MAPPING = {
+  1: null,
+  2: 'Step 1 of 3', // Personal Info
+  3: 'Step 2 of 3', // Address
+  4: 'Step 3 of 3', // Team
+  5: null,
+} as const;
+
+const CHEVRON_ROTATION = 'rotate-90';
+
 interface StepNavigationProps {
   currentStep: number;
   totalSteps: number;
@@ -22,13 +32,13 @@ const StepNavigation: React.FC<StepNavigationProps> = ({
   const isFirstStep = currentStep === 1;
 
   const handleSignIn = () => {
+    // TODO: Implement navigation to sign-in page when available
     console.log('Navigate to sign in');
   };
 
   const getStepDisplay = useCallback((step: number, total: number) => {
-    if (step === 2) return 'Step 1 of 3';
-    if (step >= 3) return `Step ${step - 2} of 3`;
-    return `Step ${step} of ${total}`;
+    const mappedStep = STEP_MAPPING[step as keyof typeof STEP_MAPPING];
+    return mappedStep || `Step ${step} of ${total}`;
   }, []);
 
   return (
@@ -40,7 +50,7 @@ const StepNavigation: React.FC<StepNavigationProps> = ({
             className="flex items-center gap-2 text-text-secondary transition-colors duration-200 hover:text-text-main focus:text-text-main focus:outline-none"
             aria-label="Go back to previous step"
           >
-            <ChevronDownIcon className="h-5 w-5 rotate-90" />
+            <ChevronDownIcon className={`h-5 w-5 ${CHEVRON_ROTATION}`} />
             <span className="back-text">Back</span>
           </button>
         )}
