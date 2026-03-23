@@ -1,6 +1,6 @@
 export type AccountType = 'individual' | 'business';
 
-export type CountryCode = 'US' | 'GB' | 'SI' | null;
+export type CountryCode = 'US' | 'EN' | 'SI' | null;
 
 export interface PersonalInfo {
   name: string;
