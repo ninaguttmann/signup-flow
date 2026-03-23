@@ -9,14 +9,14 @@ interface OnboardingState extends OnboardingData {
   setTeam: (team: string[]) => void;
   addTeamMember: (email: string) => void;
   removeTeamMember: (index: number) => void;
-  nextStep: () => void;
   prevStep: () => void;
+  canGoBack: () => boolean;
   goToStep: (step: number) => void;
   reset: () => void;
 }
 
 const initialState: OnboardingData & { currentStep: number } = {
-  currentStep: 0,
+  currentStep: 1,
   accountType: null,
   personalInfo: {
     name: '',
@@ -31,7 +31,7 @@ const initialState: OnboardingData & { currentStep: number } = {
   team: [],
 };
 
-export const useOnboardingStore = create<OnboardingState>((set) => ({
+export const useOnboardingStore = create<OnboardingState>((set, get) => ({
   ...initialState,
 
   setAccountType: (type) => set({ accountType: type }),
@@ -58,17 +58,16 @@ export const useOnboardingStore = create<OnboardingState>((set) => ({
       team: state.team.filter((_, i) => i !== index),
     })),
 
-  nextStep: () =>
-    set((state) => ({
-      currentStep: Math.min(state.currentStep + 1, 4),
-    })),
-
   prevStep: () =>
     set((state) => ({
-      currentStep: Math.max(state.currentStep - 1, 0),
+      currentStep: Math.max(state.currentStep - 1, 1),
     })),
 
   goToStep: (step) => set({ currentStep: step }),
 
   reset: () => set(initialState),
+
+  canGoBack: () => {
+    return get().currentStep > 1;
+  },
 }));
