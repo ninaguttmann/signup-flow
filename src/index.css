@@ -10,11 +10,15 @@
 
 @layer components {
   .btn {
-    @apply flex h-16 w-[426px] cursor-pointer items-center justify-center rounded-md bg-primary-main text-body-small text-text-inverse transition-all duration-200 hover:bg-primary-hover focus:outline-none disabled:cursor-not-allowed disabled:opacity-50;
+    @apply flex h-16 w-full max-w-[426px] cursor-pointer items-center justify-center rounded-md bg-primary-main text-body-small text-text-inverse transition-all duration-200 hover:bg-primary-hover focus:outline-none disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .btn-secondary {
+    @apply btn border border-text-secondary bg-white text-text-main hover:bg-gray-50;
   }
 
   .input {
-    @apply h-16 w-[426px] rounded-md border border-text-secondary bg-white p-4 text-text-input placeholder-text-secondary transition-all duration-200 focus:border-primary-main focus:outline-none focus:ring-0;
+    @apply h-16 w-full max-w-[426px] rounded-md border border-text-secondary bg-white p-4 font-sans text-caption-medium text-text-input transition-all duration-700 placeholder:text-caption-medium placeholder:text-text-secondary focus:border-primary-main focus:outline-none focus:ring-0;
   }
 
   .input-error {
@@ -22,7 +26,7 @@
   }
 
   .select {
-    @apply input appearance-none pr-10;
+    @apply input cursor-pointer appearance-none pr-10;
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
     background-size: 1.5em 1.5em;
     background-position: right 0.5rem center;
@@ -30,20 +34,42 @@
   }
 
   .checkbox {
-    @apply h-5 w-5 cursor-pointer rounded border-2 border-text-secondary text-primary-main transition-all focus:ring-2 focus:ring-primary-main focus:ring-offset-0;
+    @apply h-5 w-5 cursor-pointer rounded border border-text-secondary text-primary-main transition-all focus:outline-none focus:ring-2 focus:ring-primary-main focus:ring-offset-0;
   }
 
   .label {
-    @apply mb-2 block text-text-muted;
+    @apply block font-sans text-body-small text-text-muted;
+    margin-bottom: 14px;
+  }
+
+  .checkbox-text {
+    @apply items-center font-sans text-base font-medium leading-none tracking-normal;
+  }
+
+  .checkbox-link {
+    @apply checkbox-text inline text-primary-main underline decoration-solid hover:text-primary-hover;
   }
 
   .label-required::after {
-    @apply ml-1 text-error;
+    @apply text-text-muted;
     content: '*';
   }
 
   .error-text {
     @apply mt-1.5 flex items-center gap-1 text-sm text-error;
+  }
+
+  .helper-text {
+    @apply mt-1.5 flex items-center gap-1 text-sm text-text-secondary;
+  }
+
+  .password-toggle {
+    @apply absolute top-1/2 z-10 flex -translate-y-1/2 items-center justify-center text-text-secondary hover:text-text-main focus:outline-none;
+    right: 74px; /* Matches input padding (16px) + icon width (20px) + icon spacing (38px) */
+  }
+
+  .password-toggle-text {
+    @apply text-right font-sans text-xs font-normal leading-none tracking-normal text-black;
   }
 
   .card {
