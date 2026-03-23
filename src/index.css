@@ -103,17 +103,17 @@
     @apply grid min-h-screen grid-cols-[46%_auto] bg-white;
   }
 
-  .page-wrapper > div:first-child {
+  .page-wrapper > aside:first-child {
     @apply relative bg-cover bg-center bg-no-repeat;
-    background-image: url('@/assets/images/background.jpg');
+    background-image: url('/src/assets/images/background.jpg');
   }
 
-  .page-wrapper > div:first-child::before {
+  .page-wrapper > aside:first-child::before {
     content: '';
     @apply absolute inset-0 z-0 bg-[#1565D8E5];
   }
 
-  .page-wrapper > div:first-child > * {
+  .page-wrapper > aside:first-child > * {
     @apply relative z-10;
   }
 
