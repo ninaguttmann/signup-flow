@@ -73,11 +73,11 @@
   }
 
   .card {
-    @apply w-[426px] rounded-md bg-white p-[28px] text-caption shadow-soft;
+    @apply w-[426px] rounded-md border border-transparent bg-white p-[28px] text-caption shadow-soft;
   }
 
   .card-hover {
-    @apply w-[426px] cursor-pointer rounded-md border border-primary-main bg-card-hover p-[28px] text-caption shadow-medium;
+    @apply w-[426px] cursor-pointer rounded-md border border-primary-main bg-card-hover p-[28px] text-caption shadow-soft;
   }
 
   .form-group {
@@ -136,6 +136,14 @@
 
   .step-title {
     @apply text-body-small font-medium text-text-main;
+  }
+
+  .icon-inverted {
+    filter: invert(1);
+  }
+
+  .group:hover .icon-inverted {
+    filter: invert(0);
   }
 }
 

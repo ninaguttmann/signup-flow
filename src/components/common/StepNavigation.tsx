@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { cn } from '@/utils/cn';
 import { ChevronDownIcon } from './Icons';
 
@@ -24,6 +24,12 @@ const StepNavigation: React.FC<StepNavigationProps> = ({
   const handleSignIn = () => {
     console.log('Navigate to sign in');
   };
+
+  const getStepDisplay = useCallback((step: number, total: number) => {
+    if (step === 2) return 'Step 1 of 3';
+    if (step >= 3) return `Step ${step - 2} of 3`;
+    return `Step ${step} of ${total}`;
+  }, []);
 
   return (
     <div className={cn('flex h-12 w-full items-center justify-between bg-white px-6', className)}>
@@ -54,9 +60,7 @@ const StepNavigation: React.FC<StepNavigationProps> = ({
           </div>
         ) : (
           <>
-            <div className="step-counter">
-              Step {currentStep} of {totalSteps}
-            </div>
+            <div className="step-counter">{getStepDisplay(currentStep, totalSteps)}</div>
             <div className="step-title">{stepTitle}</div>
           </>
         )}
