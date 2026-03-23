@@ -42,8 +42,8 @@ const StepNavigation: React.FC<StepNavigationProps> = ({
   }, []);
 
   return (
-    <div className={cn('flex h-12 w-full items-center justify-between bg-white px-6', className)}>
-      <div className="flex items-center gap-2">
+    <div className={cn('flex h-12 w-full items-center justify-between bg-white', className)}>
+      <div className="flex items-center gap-2 pr-[90px]">
         {!isFirstStep && showBackButton && (
           <button
             onClick={onBack}
@@ -56,7 +56,7 @@ const StepNavigation: React.FC<StepNavigationProps> = ({
         )}
       </div>
 
-      <div className="flex flex-col items-end gap-1">
+      <div className="flex flex-col items-end gap-1 pr-[90px]">
         {isFirstStep ? (
           <div className="sign-in-text">
             Already have an account?{' '}

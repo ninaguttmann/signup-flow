@@ -75,10 +75,7 @@ function App() {
                   </aside>
 
                   {/* Second column - right side with StepNavigation */}
-                  <main
-                    className="flex h-full flex-col bg-white pb-[75px] pr-[90px]"
-                    aria-label="Onboarding form"
-                  >
+                  <main className="flex h-full flex-col bg-white" aria-label="Onboarding form">
                     <header className="pt-[75px]">
                       {currentStep !== HIDE_NAVIGATION_STEP && (
                         <StepNavigation
@@ -90,7 +87,7 @@ function App() {
                       )}
                     </header>
 
-                    <div className="mx-auto mt-content-margin-top flex max-w-content-max-width flex-1 items-center justify-center">
+                    <div className="mx-auto mt-content-margin-top flex max-w-content-max-width flex-1 justify-center">
                       {renderStepContent()}
                     </div>
                   </main>
